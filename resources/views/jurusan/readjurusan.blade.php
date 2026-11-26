@@ -6,6 +6,7 @@
             <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Daftar Jurusan</h5>
             <div class="table-responsive">
+                <a href="{{ route('jurusan.create') }}" class="btn btn-primary mb-3">Tambah Jurusan</a>
                 <table class="table text-nowrap mb-0 align-middle">
                 <thead class="text-dark fs-4">
                     <tr>
@@ -26,7 +27,12 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $jurusan->nama_jurusan }}</td>   
                         <td>
-                            Ini Tombol Aksi
+                            <a href="{{ route('jurusan.edit', $jurusan->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('jurusan.destroy', $jurusan->id) }}" method="POST" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus jurusan ini?')">Hapus</button>
+                            </form>
                         </td>
                     </tr>     
                     @endforeach       
